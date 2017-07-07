@@ -13,7 +13,8 @@ exports.index = (req, res, next) => {
   salesforce.conn.sobject('Action__c')
   .find(
     // conditions in JSON object
-    { 'Action__c.RecordTypeId' : 'Training' },
+    // { 'RecordTypeId' : 'Training' },
+    {  },
     // fields in JSON object
     { Id: 1,
       Name: 1,

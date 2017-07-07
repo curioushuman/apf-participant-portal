@@ -20,6 +20,7 @@ const expressStatusMonitor = require('express-status-monitor');
 const sass = require('node-sass-middleware');
 const multer = require('multer');
 const jsforceAjaxProxy = require('jsforce-ajax-proxy');
+const cors = require('cors');
 
 const upload = multer({ dest: path.join(__dirname, 'uploads') });
 
@@ -35,7 +36,7 @@ dotenv.load({ path: '.env' });
 // const userController = require('./controllers/user');
 // const apiController = require('./controllers/api');
 // const contactController = require('./controllers/contact');
-const salesforceActionsController = require('./controllers/salesforce/actions');
+const salesforceActionController = require('./controllers/salesforce/action');
 
 /**
  * API keys and Passport configuration.
@@ -117,10 +118,25 @@ app.use(expressValidator());
 app.use(express.static(path.join(__dirname, 'public'), { maxAge: 31557600000 }));
 app.all('/proxy/?*', jsforceAjaxProxy());
 
+// CORS
+var corsWhitelist = [
+  'http://localhost:3000',
+  'http://portal.asiapacificforum.net'
+];
+var corsOptions = {
+  origin: function (origin, callback) {
+    if (corsWhitelist.indexOf(origin) !== -1) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  }
+};
+
 /**
  * Primary app routes.
  */
-app.get('/salesforce/actions', salesforceActionsController.index);
+app.get('/salesforce/action', cors(corsOptions), salesforceActionController.index);
 // app.get('/', homeController.index);
 // app.get('/login', userController.getLogin);
 // app.post('/login', userController.postLogin);
