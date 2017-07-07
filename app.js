@@ -35,7 +35,7 @@ dotenv.load({ path: '.env' });
 // const userController = require('./controllers/user');
 // const apiController = require('./controllers/api');
 // const contactController = require('./controllers/contact');
-const salesforceController = require('./controllers/salesforce');
+const salesforceActionsController = require('./controllers/salesforce/actions');
 
 /**
  * API keys and Passport configuration.
@@ -120,7 +120,7 @@ app.all('/proxy/?*', jsforceAjaxProxy());
 /**
  * Primary app routes.
  */
-app.get('/', salesforceController.index);
+app.get('/salesforce/actions', salesforceActionsController.index);
 // app.get('/', homeController.index);
 // app.get('/login', userController.getLogin);
 // app.post('/login', userController.postLogin);

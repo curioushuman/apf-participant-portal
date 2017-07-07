@@ -10,14 +10,4 @@ conn.login(process.env.SALESFORCE_USERNAME, pat, function(err, userInfo) {
   console.log("User ID: " + peach);
 });
 
-/**
- * GET /
- * Home page.
- */
-exports.index = (req, res) => {
-  console.log('balls');
-  console.log(peach);
-  res.render('index', {
-    title: 'Home'
-  });
-};
+exports.conn = conn;
