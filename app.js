@@ -29,7 +29,9 @@ dotenv.load({ path: '.env' });
  */
 const accountController = require('./controllers/salesforce/account')
 const actionController = require('./controllers/salesforce/action');
+const affiliationController = require('./controllers/salesforce/affiliation');
 const contactController = require('./controllers/salesforce/contact');
+const participantController = require('./controllers/salesforce/participant');
 
 /**
  * Create Express server.
@@ -74,7 +76,9 @@ var corsOptions = {
 // ENABLED
 app.get('/salesforce/account', cors(corsOptions), accountController.list);
 app.get('/salesforce/action/:slug', cors(corsOptions), actionController.retrieve);
+app.get('/salesforce/affiliation/:contactid/:accountid', cors(corsOptions), affiliationController.retrieve);
 app.get('/salesforce/contact/:email', cors(corsOptions), contactController.retrieve);
+app.get('/salesforce/participant/:contactid/:actionid', cors(corsOptions), participantController.retrieve);
 
 /**
  * Error Handler.
