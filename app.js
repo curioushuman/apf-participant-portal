@@ -27,7 +27,7 @@ dotenv.load({ path: '.env' });
 /**
  * Controllers (route handlers).
  */
-const salesforceActionController = require('./controllers/salesforce/action');
+const actionController = require('./controllers/salesforce/action');
 
 /**
  * Create Express server.
@@ -51,8 +51,8 @@ app.all('/proxy/?*', jsforceAjaxProxy());
 
 // CORS
 var corsWhitelist = [
-  'http://localhost:3000',
-  'http://portal.asiapacificforum.net'
+  DEV_URI,
+  PRODUCTION_URI
 ];
 var corsOptions = {
   origin: function (origin, callback) {
@@ -67,8 +67,8 @@ var corsOptions = {
 /**
  * Primary app routes.
  */
-app.get('/salesforce/action', cors(corsOptions), salesforceActionController.list);
-app.get('/salesforce/action/:slug', cors(corsOptions), salesforceActionController.retrieve);
+app.get('/salesforce/action', cors(corsOptions), actionController.list);
+app.get('/salesforce/action/:slug', cors(corsOptions), actionController.retrieve);
 
 /**
  * Error Handler.
