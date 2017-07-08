@@ -12,13 +12,15 @@ exports.list = (req, res, next) => {
 
   salesforce.conn.sobject('Action__c')
   .find(
-    // conditions in JSON object
-    // { 'RecordTypeId' : '0126F000000iyY7QAI' },  // Training only
-    {  }, // ALL
-    // fields in JSON object
-    { Id: 1,
+    // {
+    //   'RecordTypeId' : '0126F000000iyY7QAI'
+    // },  // Training only
+    {}, // ALL
+    {
+      Id: 1,
       Name: 1,
-      CreatedDate: 1 }
+      CreatedDate: 1
+    }
   )
   .sort({ CreatedDate: -1, Name : 1 })
   .limit(5)
@@ -35,6 +37,7 @@ exports.list = (req, res, next) => {
 };
 
 /**
+ * DISABLED FOR NOW
  * @api {get} /actions/:slug Retrieve action
  * @apiName RetrieveAction
  * @apiGroup Action
@@ -46,12 +49,14 @@ exports.retrieve = (req, res, next) => {
 
   salesforce.conn.sobject('Action__c')
   .find(
-    // conditions in JSON object
-    { 'Slug__c' : req.params.slug },
-    // fields in JSON object
-    { Id: 1,
+    {
+      'Slug__c' : req.params.slug
+    },
+    {
+      Id: 1,
       Name: 1,
-      CreatedDate: 1 }
+      CreatedDate: 1
+    }
   )
   .limit(1)
   .execute(function(err, records) {

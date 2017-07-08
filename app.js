@@ -28,6 +28,7 @@ dotenv.load({ path: '.env' });
  * Controllers (route handlers).
  */
 const actionController = require('./controllers/salesforce/action');
+const contactController = require('./controllers/salesforce/contact');
 
 /**
  * Create Express server.
@@ -51,8 +52,8 @@ app.all('/proxy/?*', jsforceAjaxProxy());
 
 // CORS
 var corsWhitelist = [
-  DEV_URI,
-  PRODUCTION_URI
+  process.env.DEV_URI,
+  process.env.PRODUCTION_URI
 ];
 var corsOptions = {
   origin: function (origin, callback) {
@@ -67,8 +68,11 @@ var corsOptions = {
 /**
  * Primary app routes.
  */
-app.get('/salesforce/action', cors(corsOptions), actionController.list);
+// DISABLED
+// app.get('/salesforce/action', cors(corsOptions), actionController.list);
+// ENABLED
 app.get('/salesforce/action/:slug', cors(corsOptions), actionController.retrieve);
+app.get('/salesforce/contact/:email', cors(corsOptions), contactController.retrieve);
 
 /**
  * Error Handler.
