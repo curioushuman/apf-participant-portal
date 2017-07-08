@@ -67,7 +67,8 @@ var corsOptions = {
 /**
  * Primary app routes.
  */
-app.get('/salesforce/action', cors(corsOptions), salesforceActionController.index);
+app.get('/salesforce/action', cors(corsOptions), salesforceActionController.list);
+app.get('/salesforce/action/:slug', cors(corsOptions), salesforceActionController.retrieve);
 
 /**
  * Error Handler.
