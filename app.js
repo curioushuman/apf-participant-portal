@@ -32,6 +32,8 @@ const actionController = require('./controllers/salesforce/action');
 const affiliationController = require('./controllers/salesforce/affiliation');
 const contactController = require('./controllers/salesforce/contact');
 const participantController = require('./controllers/salesforce/participant');
+const questionController = require('./controllers/salesforce/question');
+const responseController = require('./controllers/salesforce/response');
 
 /**
  * Create Express server.
@@ -79,6 +81,9 @@ app.get('/salesforce/action/:slug', cors(corsOptions), actionController.retrieve
 app.get('/salesforce/affiliation/:contactid/:accountid', cors(corsOptions), affiliationController.retrieve);
 app.get('/salesforce/contact/:email', cors(corsOptions), contactController.retrieve);
 app.get('/salesforce/participant/:contactid/:actionid', cors(corsOptions), participantController.retrieve);
+app.get('/salesforce/question/:actionid', cors(corsOptions), questionController.list);
+app.get('/salesforce/response/:participantid', cors(corsOptions), responseController.list);
+app.get('/salesforce/response/:participantid/:questionid', cors(corsOptions), responseController.retrieve);
 
 /**
  * Error Handler.
