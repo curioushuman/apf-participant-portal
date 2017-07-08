@@ -27,6 +27,7 @@ dotenv.load({ path: '.env' });
 /**
  * Controllers (route handlers).
  */
+const accountController = require('./controllers/salesforce/account')
 const actionController = require('./controllers/salesforce/action');
 const contactController = require('./controllers/salesforce/contact');
 
@@ -71,6 +72,7 @@ var corsOptions = {
 // DISABLED
 // app.get('/salesforce/action', cors(corsOptions), actionController.list);
 // ENABLED
+app.get('/salesforce/account', cors(corsOptions), accountController.list);
 app.get('/salesforce/action/:slug', cors(corsOptions), actionController.retrieve);
 app.get('/salesforce/contact/:email', cors(corsOptions), contactController.retrieve);
 
