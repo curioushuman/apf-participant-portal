@@ -19,6 +19,9 @@ exports.list = (req, res, next) => {
     {
       Id: 1,
       Name: 1,
+      Training_partner__c: 1,
+      Description__c: 1,
+      Help_text__c: 1,
       CreatedDate: 1
     }
   )
@@ -55,6 +58,9 @@ exports.retrieve = (req, res, next) => {
     {
       Id: 1,
       Name: 1,
+      Training_partner__c: 1,
+      Description__c: 1,
+      Help_text__c: 1,
       CreatedDate: 1
     }
   )
