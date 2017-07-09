@@ -19,6 +19,13 @@ exports.list = (req, res, next) => {
     {
       Id: 1,
       Name: 1,
+      Registrations_due_date__c: 1,
+      Digital_component__c: 1,
+      Digital_start_date__c: 1,
+      Digital_finish_date__c: 1,
+      Face_to_face_component__c: 1,
+      Face_to_face_start_date__c: 1,
+      Face_to_face_finish_date__c: 1,
       Training_partner__c: 1,
       Description__c: 1,
       Help_text__c: 1,
