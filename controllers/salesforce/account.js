@@ -34,3 +34,24 @@ exports.list = (req, res, next) => {
   });
 
 };
+
+/**
+ * @api {get} /salesforce/account/:accountid Retrieve action
+ * @apiName RetrieveAccount
+ * @apiGroup Account
+ * @apiSuccess {Object} action Account's data.
+ * @apiError {Object} 400 Some parameters may contain invalid values.
+ * @apiError 404 Account not found.
+ */
+exports.retrieve = (req, res, next) => {
+
+  salesforce.conn.sobject('Account')
+  .retrieve(req.params.accountid, function(err, account) {
+    if (err) {
+      console.error(err);
+      return next(err);
+    }
+    res.send(account);
+  });
+
+};

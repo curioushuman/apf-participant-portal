@@ -77,6 +77,7 @@ var corsOptions = {
 // app.get('/salesforce/action', cors(corsOptions), actionController.list);
 // ENABLED
 app.get('/salesforce/account', cors(corsOptions), accountController.list);
+app.get('/salesforce/account/:accountid', cors(corsOptions), accountController.retrieve);
 app.get('/salesforce/action/:slug', cors(corsOptions), actionController.retrieve);
 app.get('/salesforce/affiliation/:contactid/:accountid', cors(corsOptions), affiliationController.retrieve);
 app.get('/salesforce/contact/:email', cors(corsOptions), contactController.retrieve);

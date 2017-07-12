@@ -1,6 +1,7 @@
 const salesforce = require('../salesforce');
 
 /**
+ * DISABLED FOR NOW
  * @api {get} /salesforce/action Retrieve actions
  * @apiName RetrieveActions
  * @apiGroup Action
@@ -47,8 +48,7 @@ exports.list = (req, res, next) => {
 };
 
 /**
- * DISABLED FOR NOW
- * @api {get} /actions/:slug Retrieve action
+ * @api {get} /salesforce/action/:slug Retrieve action
  * @apiName RetrieveAction
  * @apiGroup Action
  * @apiSuccess {Object} action Action's data.
