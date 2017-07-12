@@ -25,6 +25,8 @@ exports.retrieve = (req, res, next) => {
     {
       Id: 1,
       Name: 1,
+      npe5__Contact__c: 1,
+      npe5__Organization__c: 1,
       Department__c: 1,
       npe5__Primary__c: 1,
       npe5__Role__c: 1,

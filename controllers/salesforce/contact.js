@@ -26,6 +26,7 @@ exports.retrieve = (req, res, next) => {
       Title: 1,
       Department: 1,
       Email: 1,
+      Closest_airport__c: 1,
       npe01__HomeEmail__c: 1,
       npe01__WorkEmail__c: 1,
       npe01__Preferred_Email__c: 1,

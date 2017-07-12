@@ -28,7 +28,6 @@ exports.retrieve = (req, res, next) => {
       Knowledge_they_would_like_to_gain__c: 1,
       Skills_they_would_like_to_gain__c: 1,
       Additional_information__c: 1,
-      // Airport_nearest__c: 1,
       CreatedDate: 1
     }
   )
