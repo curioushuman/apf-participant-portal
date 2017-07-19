@@ -54,6 +54,40 @@ exports.retrieve = (req, res, next) => {
 };
 
 /**
+ * @api {get} /affiliations/primary/:contactid Retrieve affiliation
+ * @apiName RetrievePrimaryAffiliation
+ * @apiGroup Affiliation
+ * @apiSuccess {Object} affiliation Affiliation's data.
+ * @apiError {Object} 400 Some parameters may contain invalid values.
+ * @apiError 404 Affiliation not found.
+ */
+exports.retrievePrimary = (req, res, next) => {
+
+  salesforce.conn.sobject('npe5__Affiliation__c')
+  .find(
+    {
+      'npe5__Contact__c': req.params.contactid,
+      'npe5__Primary__c': true
+    },
+    allowedFields
+  )
+  .limit(1)
+  .execute(function(err, records) {
+    if (err) {
+      console.error(err);
+      return next(err);
+    }
+    console.log("fetched : " + records.length);
+    if (records.length === 0) {
+      res.sendStatus(404);
+    } else {
+      res.send(records[0]);
+    }
+  });
+
+};
+
+/**
  * @api {post} /affiliations Create affiliation
  * @apiName CreateAffiliation
  * @apiGroup Affiliation
