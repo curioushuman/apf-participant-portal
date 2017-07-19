@@ -77,14 +77,15 @@ app.options('*', cors());
  */
 // DISABLED
 // app.get('/salesforce/action', cors(corsOptions), actionController.list);
+// app.get('/salesforce/account', cors(corsOptions), accountController.list);
 // ENABLED
-app.get('/salesforce/account', cors(corsOptions), accountController.list);
+app.get('/salesforce/account/type/:type', cors(corsOptions), accountController.listByType);
 app.get('/salesforce/account/:accountid', cors(corsOptions), accountController.retrieve);
 app.post('/salesforce/account', cors(corsOptions), accountController.create);
 app.put('/salesforce/account/:accountid', cors(corsOptions), accountController.update);
 app.get('/salesforce/action/:slug', cors(corsOptions), actionController.retrieve);
-app.get('/salesforce/affiliation/:contactid/:accountid', cors(corsOptions), affiliationController.retrieve);
 app.get('/salesforce/affiliation/primary/:contactid', cors(corsOptions), affiliationController.retrievePrimary);
+app.get('/salesforce/affiliation/:contactid/:accountid', cors(corsOptions), affiliationController.retrieve);
 app.post('/salesforce/affiliation', cors(corsOptions), affiliationController.create);
 app.put('/salesforce/affiliation/:affiliationid', cors(corsOptions), affiliationController.update);
 app.get('/salesforce/contact/:email', cors(corsOptions), contactController.retrieve);

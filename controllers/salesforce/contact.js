@@ -20,17 +20,14 @@ var allowedFields = {
   MobilePhone: 1,
   npe01__PreferredPhone__c: 1,
   Fax: 1,
-  Ability_in_IT_average__c: 1,
   IT_Skills_Ability_to_download_files__c: 1,
   IT_Skill_Ability_to_use_spreadsheets__c: 1,
   IT_Skill_Ability_to_use_Word_documents__c: 1,
   IT_Skills_Ability_to_view_online_videos__c: 1,
-  Ability_in_English_average__c: 1,
   EN_Skills_Ability_to_read_in_English__c: 1,
   EN_Skills_Ability_to_speak_English__c: 1,
   EN_Skills_Ability_to_understand_spoken__c: 1,
-  EN_Skills_Ability_to_write_in_English__c: 1,
-  CreatedDate: 1
+  EN_Skills_Ability_to_write_in_English__c: 1
 };
 
 /**
