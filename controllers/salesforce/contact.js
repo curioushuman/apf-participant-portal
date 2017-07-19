@@ -1,6 +1,6 @@
 const salesforce = require('../salesforce');
 
-var allowedContactFields = {
+var allowedFields = {
   Id: 1,
   LastName: 1,
   FirstName: 1,
@@ -48,7 +48,7 @@ exports.retrieve = (req, res, next) => {
     "Email = '" + req.params.email + "'"
     + " OR npe01__HomeEmail__c = '" + req.params.email + "'"
     + " OR npe01__WorkEmail__c = '" + req.params.email + "'",
-    allowedContactFields
+    allowedFields
   )
   .limit(1)
   .execute(function(err, records) {
@@ -80,22 +80,24 @@ exports.create = (req, res, next) => {
     Email: req.body.email
   };
   for (var property in req.body) {
-    if (allowedContactFields.hasOwnProperty(property)) {
+    if (allowedFields.hasOwnProperty(property)) {
       contact[property] = req.body[property];
     }
   }
 
   salesforce.conn.sobject('Contact')
-  .create(contact,
-  function (err, ret) {
-    if (err || !ret.success) {
-      console.error(err);
-      return next(err);
+  .create(
+    contact,
+    function (err, ret) {
+      if (err || !ret.success) {
+        console.error(err);
+        return next(err);
+      }
+      contact.Id = ret.id;
+      contact.success = ret.success;
+      res.send(contact);
     }
-    contact.Id = ret.id;
-    contact.success = ret.success;
-    res.send(contact);
-  });
+  );
 
 };
 
@@ -114,21 +116,23 @@ exports.update = (req, res, next) => {
     Email: req.body.email
   };
   for (var property in req.body) {
-    if (allowedContactFields.hasOwnProperty(property)) {
+    if (allowedFields.hasOwnProperty(property)) {
       contact[property] = req.body[property];
     }
   }
 
   // this is where you'll need to add in the relevant req.body if they exist
   salesforce.conn.sobject('Contact')
-  .update(contact,
-  function (err, ret) {
-    if (err || !ret.success) {
-      console.error(err);
-      return next(err);
+  .update(
+    contact,
+    function (err, ret) {
+      if (err || !ret.success) {
+        console.error(err);
+        return next(err);
+      }
+      contact.success = ret.success;
+      res.send(contact);
     }
-    contact.success = ret.success;
-    res.send(contact);
-  });
+  );
 
 };

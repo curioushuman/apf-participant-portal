@@ -1,5 +1,22 @@
 const salesforce = require('../salesforce');
 
+var allowedFields = {
+  Id: 1,
+  Name: 1,
+  Selection_criteria__c: 1,
+  Registrations_due_date__c: 1,
+  Digital_component__c: 1,
+  Digital_start_date__c: 1,
+  Digital_finish_date__c: 1,
+  Face_to_face_component__c: 1,
+  Face_to_face_start_date__c: 1,
+  Face_to_face_finish_date__c: 1,
+  // Training_partner__c: 1,
+  Description__c: 1,
+  Help_text__c: 1,
+  CreatedDate: 1
+};
+
 /**
  * DISABLED FOR NOW
  * @api {get} /salesforce/action Retrieve actions
@@ -17,22 +34,7 @@ exports.list = (req, res, next) => {
     //   'RecordTypeId' : '0126F000000iyY7QAI'
     // },  // Training only
     {}, // ALL
-    {
-      Id: 1,
-      Name: 1,
-      Selection_criteria__c: 1,
-      Registrations_due_date__c: 1,
-      Digital_component__c: 1,
-      Digital_start_date__c: 1,
-      Digital_finish_date__c: 1,
-      Face_to_face_component__c: 1,
-      Face_to_face_start_date__c: 1,
-      Face_to_face_finish_date__c: 1,
-      // Training_partner__c: 1,
-      Description__c: 1,
-      Help_text__c: 1,
-      CreatedDate: 1
-    }
+    allowedFields
   )
   .sort({ CreatedDate: -1, Name : 1 })
   .limit(5)
@@ -63,21 +65,7 @@ exports.retrieve = (req, res, next) => {
     {
       'Slug__c' : req.params.slug
     },
-    {
-      Id: 1,
-      Name: 1,
-      Registrations_due_date__c: 1,
-      Digital_component__c: 1,
-      Digital_start_date__c: 1,
-      Digital_finish_date__c: 1,
-      Face_to_face_component__c: 1,
-      Face_to_face_start_date__c: 1,
-      Face_to_face_finish_date__c: 1,
-      // Training_partner__c: 1,
-      Description__c: 1,
-      Help_text__c: 1,
-      CreatedDate: 1
-    }
+    allowedFields
   )
   .limit(1)
   .execute(function(err, records) {

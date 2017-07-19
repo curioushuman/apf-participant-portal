@@ -1,5 +1,14 @@
 const salesforce = require('../salesforce');
 
+var allowedFields = {
+  Id: 1,
+  Name: 1,
+  Question_text__c: 1,
+  Self_assessment_topic_alias__c: 1,
+  Help_text__c: 1,
+  CreatedDate: 1
+};
+
 /**
  * @api {get} /salesforce/question Retrieve questions
  * @apiName RetrieveQuestions
@@ -15,14 +24,7 @@ exports.list = (req, res, next) => {
     {
       'Action__c' : req.params.actionid
     },
-    {
-      Id: 1,
-      Name: 1,
-      Question_text__c: 1,
-      Self_assessment_topic_alias__c: 1,
-      Help_text__c: 1,
-      CreatedDate: 1
-    }
+    allowedFields
   )
   .sort({ CreatedDate: -1, Name : 1 })
   .limit(50)

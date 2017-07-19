@@ -1,5 +1,11 @@
 const salesforce = require('../salesforce');
 
+var allowedFields = {
+  Id: 1,
+  Name: 1,
+  CreatedDate: 1
+};
+
 /**
  * @api {get} /salesforce/account Retrieve accounts
  * @apiName RetrieveAccounts
@@ -15,11 +21,7 @@ exports.list = (req, res, next) => {
     {
       'Type' : 'National Human Rights Institution'
     },
-    {
-      Id: 1,
-      Name: 1,
-      CreatedDate: 1
-    }
+    allowedFields
   )
   .sort({ Name : 1 })
   .limit(50)
@@ -53,5 +55,144 @@ exports.retrieve = (req, res, next) => {
     }
     res.send(account);
   });
+
+};
+
+/**
+ * @api {post} /accounts Create account
+ * @apiName CreateAccount
+ * @apiGroup Account
+ * @apiSuccess {Object} account Account's data.
+ * @apiError {Object} 400 Some parameters may contain invalid values.
+ * @apiError 404 Account not found.
+ */
+exports.create = (req, res, next) => {
+
+  var account = {
+    Email: req.body.email
+  };
+  for (var property in req.body) {
+    if (allowedFields.hasOwnProperty(property)) {
+      account[property] = req.body[property];
+    }
+  }
+
+  salesforce.conn.sobject('Account')
+  .create(
+    account,
+    function (err, ret) {
+      if (err || !ret.success) {
+        console.error(err);
+        return next(err);
+      }
+      account.Id = ret.id;
+      account.success = ret.success;
+      res.send(account);
+    }
+  );
+
+};
+
+/**
+ * @api {post} /accounts Update account
+ * @apiName UpdateAccount
+ * @apiGroup Account
+ * @apiSuccess {Object} account Account's data.
+ * @apiError {Object} 400 Some parameters may contain invalid values.
+ * @apiError 404 Account not found.
+ */
+exports.update = (req, res, next) => {
+
+  var account = {
+    Id: req.params.accountid,
+    Email: req.body.email
+  };
+  for (var property in req.body) {
+    if (allowedFields.hasOwnProperty(property)) {
+      account[property] = req.body[property];
+    }
+  }
+
+  // this is where you'll need to add in the relevant req.body if they exist
+  salesforce.conn.sobject('Account')
+  .update(
+    account,
+    function (err, ret) {
+      if (err || !ret.success) {
+        console.error(err);
+        return next(err);
+      }
+      account.success = ret.success;
+      res.send(account);
+    }
+  );
+
+};
+
+/**
+ * @api {post} /accounts Create account
+ * @apiName CreateAccount
+ * @apiGroup Account
+ * @apiSuccess {Object} account Account's data.
+ * @apiError {Object} 400 Some parameters may contain invalid values.
+ * @apiError 404 Account not found.
+ */
+exports.create = (req, res, next) => {
+
+  var account = {};
+  for (var property in req.body) {
+    if (allowedFields.hasOwnProperty(property)) {
+      account[property] = req.body[property];
+    }
+  }
+
+  salesforce.conn.sobject('Account')
+  .create(
+    account,
+    function (err, ret) {
+      if (err || !ret.success) {
+        console.error(err);
+        return next(err);
+      }
+      account.Id = ret.id;
+      account.success = ret.success;
+      res.send(account);
+    }
+  );
+
+};
+
+/**
+ * @api {post} /accounts Update account
+ * @apiName UpdateAccount
+ * @apiGroup Account
+ * @apiSuccess {Object} account Account's data.
+ * @apiError {Object} 400 Some parameters may contain invalid values.
+ * @apiError 404 Account not found.
+ */
+exports.update = (req, res, next) => {
+
+  var account = {
+    Id: req.params.accountid
+  };
+  for (var property in req.body) {
+    if (allowedFields.hasOwnProperty(property)) {
+      account[property] = req.body[property];
+    }
+  }
+
+  // this is where you'll need to add in the relevant req.body if they exist
+  salesforce.conn.sobject('Account')
+  .update(
+    account,
+    function (err, ret) {
+      if (err || !ret.success) {
+        console.error(err);
+        return next(err);
+      }
+      account.success = ret.success;
+      res.send(account);
+    }
+  );
 
 };
