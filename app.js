@@ -70,6 +70,8 @@ var corsOptions = {
   }
 };
 
+app.options('*', cors());
+
 /**
  * Primary app routes.
  */
@@ -81,6 +83,8 @@ app.get('/salesforce/account/:accountid', cors(corsOptions), accountController.r
 app.get('/salesforce/action/:slug', cors(corsOptions), actionController.retrieve);
 app.get('/salesforce/affiliation/:contactid/:accountid', cors(corsOptions), affiliationController.retrieve);
 app.get('/salesforce/contact/:email', cors(corsOptions), contactController.retrieve);
+app.post('/salesforce/contact', cors(corsOptions), contactController.create);
+app.put('/salesforce/contact/:contactid', cors(corsOptions), contactController.update);
 app.get('/salesforce/participant/:contactid/:actionid', cors(corsOptions), participantController.retrieve);
 app.get('/salesforce/question/:actionid', cors(corsOptions), questionController.list);
 app.get('/salesforce/response/:participantid', cors(corsOptions), responseController.list);
