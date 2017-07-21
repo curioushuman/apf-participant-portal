@@ -5,7 +5,11 @@ var allowedFields = {
   Prior_experience_with_action_topic__c: 1,
   Knowledge_they_would_like_to_gain__c: 1,
   Skills_they_would_like_to_gain__c: 1,
-  Additional_information__c: 1
+  Additional_information__c: 1,
+  Contact__c: 1,
+  Action__c: 1,
+  Organisation__c: 1,
+  Type__c: 1
 };
 
 /**
@@ -65,7 +69,7 @@ exports.create = (req, res, next) => {
     }
   }
 
-  salesforce.conn.sobject('Participant')
+  salesforce.conn.sobject('Participant__c')
   .create(
     participant,
     function (err, ret) {
@@ -101,7 +105,7 @@ exports.update = (req, res, next) => {
   }
 
   // this is where you'll need to add in the relevant req.body if they exist
-  salesforce.conn.sobject('Participant')
+  salesforce.conn.sobject('Participant__c')
   .update(
     participant,
     function (err, ret) {

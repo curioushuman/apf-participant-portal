@@ -5,7 +5,9 @@ var allowedFields = {
   Name: 1,
   Score__c: 1,
   Self_assessment_topic_alias__c: 1,
-  Comments__c: 1
+  Comments__c: 1,
+  Participant__c: 1,
+  Self_assessment_question__c: 1
 };
 
 /**
@@ -96,7 +98,7 @@ exports.create = (req, res, next) => {
     }
   }
 
-  salesforce.conn.sobject('Response')
+  salesforce.conn.sobject('Self_assessment_response__c')
   .create(
     response,
     function (err, ret) {
@@ -132,7 +134,7 @@ exports.update = (req, res, next) => {
   }
 
   // this is where you'll need to add in the relevant req.body if they exist
-  salesforce.conn.sobject('Response')
+  salesforce.conn.sobject('Self_assessment_response__c')
   .update(
     response,
     function (err, ret) {
