@@ -5,8 +5,7 @@ var allowedFields = {
   Name: 1,
   Score__c: 1,
   Self_assessment_topic_alias__c: 1,
-  Comments__c: 1,
-  CreatedDate: 1
+  Comments__c: 1
 };
 
 /**

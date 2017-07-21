@@ -2,15 +2,14 @@ const salesforce = require('../salesforce');
 
 var allowedFields = {
   Id: 1,
-  Name: 1,
+  // Name: 1,
   npe5__Contact__c: 1,
   npe5__Organization__c: 1,
   Department__c: 1,
   npe5__Primary__c: 1,
   npe5__Role__c: 1,
   npe5__StartDate__c: 1,
-  npe5__Status__c: 1,
-  CreatedDate: 1
+  npe5__Status__c: 1
 };
 
 /**
@@ -139,6 +138,14 @@ exports.update = (req, res, next) => {
     }
   }
 
+  // you can't re-parent Master Detail relationships
+  // if they change their org just create a new one
+  // and update the old one to be old
+  var affiliationContact = affiliation.npe5__Contact__c;
+  delete affiliation.npe5__Contact__c;
+  var affiliationOrganisation = affiliation.npe5__Organization__c;
+  delete affiliation.npe5__Organization__c;
+
   // this is where you'll need to add in the relevant req.body if they exist
   salesforce.conn.sobject('npe5__Affiliation__c')
   .update(
@@ -149,6 +156,15 @@ exports.update = (req, res, next) => {
         return next(err);
       }
       affiliation.success = ret.success;
+
+      // reinstate the contact and organisation
+      if (affiliationOrganisation !== null) {
+        affiliation.npe5__Organization__c = affiliationOrganisation;
+      }
+      if (affiliationContact !== null) {
+        affiliation.npe5__Contact__c = affiliationContact;
+      }
+
       res.send(affiliation);
     }
   );
