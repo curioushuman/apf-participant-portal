@@ -78,6 +78,7 @@ app.options('*', cors());
 // DISABLED
 // app.get('/salesforce/action', cors(corsOptions), actionController.list);
 // app.get('/salesforce/account', cors(corsOptions), accountController.list);
+// app.put('/salesforce/response/:responseid', cors(corsOptions), responseController.update);
 // ENABLED
 app.get('/salesforce/account/type/:type', cors(corsOptions), accountController.listByType);
 app.get('/salesforce/account/:accountid', cors(corsOptions), accountController.retrieve);
@@ -98,7 +99,6 @@ app.get('/salesforce/question/:actionid', cors(corsOptions), questionController.
 app.get('/salesforce/response/:participantid', cors(corsOptions), responseController.list);
 app.get('/salesforce/response/:participantid/:questionid', cors(corsOptions), responseController.retrieve);
 app.post('/salesforce/response', cors(corsOptions), responseController.create);
-app.put('/salesforce/response/:responseid', cors(corsOptions), responseController.update);
 
 /**
  * Error Handler.

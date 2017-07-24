@@ -104,6 +104,10 @@ exports.update = (req, res, next) => {
     }
   }
 
+  // you can't re-parent Master Detail relationships
+  var participantAction = participant.Action__c;
+  delete participant.Action__c;
+
   // this is where you'll need to add in the relevant req.body if they exist
   salesforce.conn.sobject('Participant__c')
   .update(
@@ -114,6 +118,12 @@ exports.update = (req, res, next) => {
         return next(err);
       }
       participant.success = ret.success;
+
+      // reinstate the action
+      if (participantAction !== null) {
+        participant.Action__c = participantAction;
+      }
+
       res.send(participant);
     }
   );

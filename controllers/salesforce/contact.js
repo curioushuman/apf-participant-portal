@@ -24,6 +24,7 @@ var allowedFields = {
   IT_Skill_Ability_to_use_spreadsheets__c: 1,
   IT_Skill_Ability_to_use_Word_documents__c: 1,
   IT_Skills_Ability_to_view_online_videos__c: 1,
+  IT_Skill_access_to_the_Internet__c: 1,
   EN_Skills_Ability_to_read_in_English__c: 1,
   EN_Skills_Ability_to_speak_English__c: 1,
   EN_Skills_Ability_to_understand_spoken__c: 1,
