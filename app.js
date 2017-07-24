@@ -57,7 +57,7 @@ app.all('/proxy/?*', jsforceAjaxProxy());
 
 // CORS
 var corsWhitelist = [
-  process.env.DEV_URI,
+  process.env.LOCAL_URI,
   process.env.DEVELOPMENT_URI,
   process.env.STAGING_URI,
   process.env.PRODUCTION_URI
