@@ -17,7 +17,11 @@ exports.list = (req, res, next) => {
 
   salesforce.conn.sobject('Account')
   .find(
-    {},
+    {
+      'RecordTypeId' : {
+        $ne: '0126F000000Acz3QAC'
+      }
+    },
     allowedFields
   )
   .sort({ Name : 1 })
@@ -44,11 +48,24 @@ exports.list = (req, res, next) => {
  */
 exports.listByType = (req, res, next) => {
 
+  // don't pickup households!
+  var conditions = {
+    'RecordTypeId' : {
+      $ne: '0126F000000Acz3QAC'
+    }
+  };
+  // parameter exclude reverses the request i.e. excludes that type
+  if (req.query.exclude === undefined) {
+    conditions['Type'] = req.params.type;
+  } else {
+    conditions['Type'] = {
+      $ne: req.params.type
+    };
+  }
+
   salesforce.conn.sobject('Account')
   .find(
-    {
-      'Type' : req.params.type
-    },
+    conditions,
     allowedFields
   )
   .sort({ Name : 1 })

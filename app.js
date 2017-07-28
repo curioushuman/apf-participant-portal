@@ -57,21 +57,26 @@ app.use(express.static(path.join(__dirname, 'public'), { maxAge: 31557600000 }))
 app.all('/proxy/?*', jsforceAjaxProxy());
 
 // CORS
-var corsWhitelist = [
-  process.env.LOCAL_URI,
-  process.env.DEVELOPMENT_URI,
-  process.env.STAGING_URI,
-  process.env.PRODUCTION_URI
-];
-var corsOptions = {
-  origin: function (origin, callback) {
-    if (corsWhitelist.indexOf(origin) !== -1) {
-      callback(null, true)
-    } else {
-      callback(new Error('Not allowed by CORS'))
+if (process.env.ENV === 'development') {
+  app.use(cors());
+  var corsOptions = {};
+} else {
+  var corsWhitelist = [
+    process.env.LOCAL_URI,
+    process.env.DEVELOPMENT_URI,
+    process.env.STAGING_URI,
+    process.env.PRODUCTION_URI
+  ];
+  var corsOptions = {
+    origin: function (origin, callback) {
+      if (corsWhitelist.indexOf(origin) !== -1) {
+        callback(null, true)
+      } else {
+        callback(new Error('Not allowed by CORS'))
+      }
     }
-  }
-};
+  };
+}
 
 app.options('*', cors());
 

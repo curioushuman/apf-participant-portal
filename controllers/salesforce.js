@@ -16,3 +16,19 @@ conn.login(process.env.SALESFORCE_USERNAME, pat, function(err, userInfo) {
 });
 
 exports.conn = conn;
+
+// an example of OR in conditions object
+// conn.sobject("Account")
+//     .find({
+//         $or: [
+//            { Name : { $like: "ACME%" } },
+//            { Name : { $like: "Mashmatrix%" } }
+//         ]
+//     })
+//     .execute(function (err, accounts) {
+//         // ...
+//     })
+
+// for more examples review MongoDB stuff
+// https://docs.mongodb.com/manual/tutorial/query-documents/
+// https://docs.mongodb.com/manual/reference/operator/query/
