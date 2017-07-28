@@ -13,6 +13,36 @@ var allowedFields = {
 };
 
 /**
+ * @api {get} /salesforce/affiliation Retrieve affiliations
+ * @apiName RetrieveAffiliations
+ * @apiGroup Affiliation
+ * @apiUse listParams
+ * @apiSuccess {Object[]} affiliations List of affiliations.
+ * @apiError {Object} 400 Some parameters may contain invalid values.
+ */
+exports.listContact = (req, res, next) => {
+
+  salesforce.conn.sobject('npe5__Affiliation__c')
+  .find(
+    {
+      'npe5__Contact__c': req.params.contactid
+    },
+    allowedFields
+  )
+  .limit(50)
+  .skip(0)
+  .execute(function(err, records) {
+    if (err) {
+      console.error(err);
+      return next(err);
+    }
+    console.log("fetched : " + records.length);
+    res.send(records);
+  });
+
+};
+
+/**
  * @api {get} /affiliations/:email Retrieve affiliation
  * @apiName RetrieveAffiliation
  * @apiGroup Affiliation

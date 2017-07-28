@@ -93,6 +93,7 @@ app.get('/salesforce/account/:accountid', cors(corsOptions), accountController.r
 app.post('/salesforce/account', cors(corsOptions), accountController.create);
 app.put('/salesforce/account/:accountid', cors(corsOptions), accountController.update);
 app.get('/salesforce/action/:slug', cors(corsOptions), actionController.retrieve);
+app.get('/salesforce/affiliation/contact/:contactid', cors(corsOptions), affiliationController.listContact);
 app.get('/salesforce/affiliation/primary/:contactid', cors(corsOptions), affiliationController.retrievePrimary);
 app.get('/salesforce/affiliation/:contactid/:accountid', cors(corsOptions), affiliationController.retrieve);
 app.post('/salesforce/affiliation', cors(corsOptions), affiliationController.create);
