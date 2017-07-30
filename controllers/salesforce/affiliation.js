@@ -22,13 +22,20 @@ var allowedFields = {
  */
 exports.listContact = (req, res, next) => {
 
+  var conditions = {
+    'npe5__Contact__c': req.params.contactid
+  };
+
+  if (req.query.current !== undefined) {
+    conditions['npe5__Status__c'] = 'Current';
+  }
+
   salesforce.conn.sobject('npe5__Affiliation__c')
   .find(
-    {
-      'npe5__Contact__c': req.params.contactid
-    },
+    conditions,
     allowedFields
   )
+  .sort({ npe5__EndDate__c: -1, npe5__StartDate__c: -1 })
   .limit(50)
   .skip(0)
   .execute(function(err, records) {

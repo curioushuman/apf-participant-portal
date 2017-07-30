@@ -13,7 +13,8 @@ var allowedFields = {
   Face_to_face_finish_date__c: 1,
   // Training_partner__c: 1,
   Description__c: 1,
-  Help_text__c: 1
+  Help_text__c: 1,
+  RecordTypeId: 1
 };
 
 /**
