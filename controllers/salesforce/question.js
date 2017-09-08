@@ -5,6 +5,7 @@ var allowedFields = {
   Name: 1,
   Question_text__c: 1,
   Self_assessment_topic_alias__c: 1,
+  Type__c: 1,
   Help_text__c: 1
 };
 

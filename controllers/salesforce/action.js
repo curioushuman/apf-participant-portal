@@ -4,6 +4,7 @@ var allowedFields = {
   Id: 1,
   Name: 1,
   Selection_criteria__c: 1,
+  Ideal_candidate__c: 1,
   Registrations_due_date__c: 1,
   Digital_component__c: 1,
   Digital_start_date__c: 1,
