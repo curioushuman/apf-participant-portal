@@ -35,6 +35,8 @@ const contactController = require('./controllers/salesforce/contact');
 const participantController = require('./controllers/salesforce/participant');
 const questionController = require('./controllers/salesforce/question');
 const responseController = require('./controllers/salesforce/response');
+const sessionController = require('./controllers/salesforce/session');
+const sessionParticipationController = require('./controllers/salesforce/session_participation');
 
 /**
  * Create Express server.
@@ -108,6 +110,11 @@ app.get('/salesforce/question/:actionid', cors(corsOptions), questionController.
 app.get('/salesforce/response/:participantid', cors(corsOptions), responseController.list);
 app.get('/salesforce/response/:participantid/:questionid', cors(corsOptions), responseController.retrieve);
 app.post('/salesforce/response', cors(corsOptions), responseController.create);
+app.get('/salesforce/session/:actionid', cors(corsOptions), sessionController.list);
+app.get('/salesforce/session_participant/:participantid/:actionid', cors(corsOptions), sessionParticipationController.list);
+app.get('/salesforce/session_participant/:participantid/:sessionid', cors(corsOptions), sessionParticipationController.retrieve);
+app.post('/salesforce/session_participant', cors(corsOptions), sessionParticipationController.create);
+app.put('/salesforce/session_participant/:session_participantid', cors(corsOptions), sessionParticipationController.update);
 
 /**
  * Error Handler.
