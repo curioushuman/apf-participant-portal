@@ -110,11 +110,12 @@ app.get('/salesforce/question/:actionid', cors(corsOptions), questionController.
 app.get('/salesforce/response/:participantid', cors(corsOptions), responseController.list);
 app.get('/salesforce/response/:participantid/:questionid', cors(corsOptions), responseController.retrieve);
 app.post('/salesforce/response', cors(corsOptions), responseController.create);
+// app.put('/salesforce/response/:responseid', cors(corsOptions), responseController.update);
 app.get('/salesforce/session/:actionid', cors(corsOptions), sessionController.list);
-app.get('/salesforce/session_participant/:participantid/:actionid', cors(corsOptions), sessionParticipationController.list);
-app.get('/salesforce/session_participant/:participantid/:sessionid', cors(corsOptions), sessionParticipationController.retrieve);
-app.post('/salesforce/session_participant', cors(corsOptions), sessionParticipationController.create);
-app.put('/salesforce/session_participant/:session_participantid', cors(corsOptions), sessionParticipationController.update);
+app.get('/salesforce/session_participation/:participantid/:actionid', cors(corsOptions), sessionParticipationController.list);
+app.get('/salesforce/session_participation/:participantid/:sessionid', cors(corsOptions), sessionParticipationController.retrieve);
+app.post('/salesforce/session_participation', cors(corsOptions), sessionParticipationController.create);
+// app.put('/salesforce/session_participation/:session_participantid', cors(corsOptions), sessionParticipationController.update);
 
 /**
  * Error Handler.
