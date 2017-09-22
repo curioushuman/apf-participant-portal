@@ -9,7 +9,12 @@ var allowedFields = {
   Contact__c: 1,
   Action__c: 1,
   Organisation__c: 1,
-  Type__c: 1
+  Type__c: 1,
+  Connection_speed_Mbps__c: 1,
+  Technology_browser__c: 1,
+  Technology_operating_system__c: 1,
+  Technology_screen_resolution__c: 1,
+  Registration_complete__c: 1
 };
 
 /**
