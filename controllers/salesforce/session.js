@@ -4,7 +4,9 @@ var allowedFields = {
   Id: 1,
   Name: 1,
   Action__c: 1,
-  Order_of_occurrence__c: 1,
+  Day__c: 1,
+  Period__c: 1,
+  Order_of_appearance__c: 1,
   Description__c: 1
 };
 
@@ -21,11 +23,19 @@ exports.list = (req, res, next) => {
   salesforce.conn.sobject('Session__c')
   .find(
     {
-      'Action__c' : req.params.actionid
+      'Action__c' : req.params.actionid,
+      'Requires_registration__c' : true
     },
     allowedFields
   )
-  .sort({ Order_of_occurrence__c: 1, CreatedDate : 1 })
+  .sort(
+    {
+      Day__c: 1,
+      Period__c: 1,
+      Order_of_appearance__c: 1,
+      CreatedDate : 1
+    }
+  )
   .limit(50)
   .skip(0)
   .execute(function(err, records) {

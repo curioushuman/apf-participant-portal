@@ -17,6 +17,7 @@ var allowedFields = {
   // Training_partner__c: 1,
   Description__c: 1,
   Help_text__c: 1,
+  Supporting_text__c: 1,
   RecordTypeId: 1
 };
 

@@ -19,7 +19,7 @@ var allowedFields = {
  */
 exports.list = (req, res, next) => {
 
-  salesforce.conn.sobject('Session_participant__c')
+  salesforce.conn.sobject('Session_participation__c')
   .find(
     {
       'Participant__c' : req.params.participantid,
@@ -57,7 +57,7 @@ exports.retrieve = (req, res, next) => {
     return next(err);
   }
 
-  salesforce.conn.sobject('Session_participant__c')
+  salesforce.conn.sobject('Session_participation__c')
   .find(
     {
       'Participant__c' : req.params.participantid,
@@ -98,7 +98,7 @@ exports.create = (req, res, next) => {
     }
   }
 
-  salesforce.conn.sobject('Session_participant__c')
+  salesforce.conn.sobject('Session_participation__c')
   .create(
     session_participation,
     function (err, ret) {
@@ -134,7 +134,7 @@ exports.update = (req, res, next) => {
   }
 
   // this is where you'll need to add in the relevant req.body if they exist
-  salesforce.conn.sobject('Session_participant__c')
+  salesforce.conn.sobject('Session_participation__c')
   .update(
     session_participation,
     function (err, ret) {
