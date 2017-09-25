@@ -8,6 +8,7 @@ var allowedFields = {
   Department__c: 1,
   npe5__Primary__c: 1,
   npe5__Role__c: 1,
+  npe5__Description__c: 1,
   npe5__StartDate__c: 1,
   npe5__Status__c: 1
 };
