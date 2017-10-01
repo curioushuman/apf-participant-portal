@@ -22,8 +22,7 @@ exports.list = (req, res, next) => {
   salesforce.conn.sobject('Session_participation__c')
   .find(
     {
-      'Participant__c' : req.params.participantid,
-      'Action__c' : req.params.actionid
+      'Participant__c' : req.params.participantid
     },
     allowedFields
   )
