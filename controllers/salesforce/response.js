@@ -133,6 +133,16 @@ exports.update = (req, res, next) => {
     }
   }
 
+  // you can't re-parent Master Detail relationships
+  var responseParticipant = response.Participant__c;
+  delete response.Participant__c;
+  var responseQuestion = response.Self_assessment_question__c;
+  delete response.Self_assessment_question__c;
+  var responseTopicAlias = response.Self_assessment_topic_alias__c;
+  delete response.Self_assessment_topic_alias__c;
+  var responseName = response.Name;
+  delete response.Name;
+
   // this is where you'll need to add in the relevant req.body if they exist
   salesforce.conn.sobject('Self_assessment_response__c')
   .update(
@@ -143,6 +153,20 @@ exports.update = (req, res, next) => {
         return next(err);
       }
       response.success = ret.success;
+
+      if (responseParticipant !== null) {
+        response.Participant__c = responseParticipant;
+      }
+      if (responseQuestion !== null) {
+        response.Self_assessment_question__c = responseQuestion;
+      }
+      if (responseTopicAlias !== null) {
+        response.Self_assessment_topic_alias__c = responseTopicAlias;
+      }
+      if (responseName !== null) {
+        response.Name = responseName;
+      }
+
       res.send(response);
     }
   );

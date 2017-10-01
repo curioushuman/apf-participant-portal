@@ -132,6 +132,14 @@ exports.update = (req, res, next) => {
     }
   }
 
+  // you can't re-parent Master Detail relationships
+  var sessionParticipationParticipant = session_participation.Participant__c;
+  delete session_participation.Participant__c;
+  var sessionParticipationSession = session_participation.Session__c;
+  delete session_participation.Session__c;
+  var sessionParticipationName = session_participation.Name;
+  delete session_participation.Name;
+
   // this is where you'll need to add in the relevant req.body if they exist
   salesforce.conn.sobject('Session_participation__c')
   .update(
@@ -142,6 +150,17 @@ exports.update = (req, res, next) => {
         return next(err);
       }
       session_participation.success = ret.success;
+
+      if (sessionParticipationParticipant !== null) {
+        session_participation.Participant__c = sessionParticipationParticipant;
+      }
+      if (sessionParticipationSession !== null) {
+        session_participation.Session__c = sessionParticipationSession;
+      }
+      if (sessionParticipationName !== null) {
+        session_participation.Name = sessionParticipationName;
+      }
+
       res.send(session_participation);
     }
   );
