@@ -14,7 +14,8 @@ var allowedFields = {
   Technology_browser__c: 1,
   Technology_operating_system__c: 1,
   Technology_screen_resolution__c: 1,
-  Registration_complete__c: 1
+  Registration_complete__c: 1,
+  Status__c: 1
 };
 
 /**

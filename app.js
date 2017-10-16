@@ -95,11 +95,11 @@ app.get('/salesforce/account/:accountid', cors(corsOptions), accountController.r
 app.post('/salesforce/account', cors(corsOptions), accountController.create);
 app.put('/salesforce/account/:accountid', cors(corsOptions), accountController.update);
 app.get('/salesforce/action/:slug', cors(corsOptions), actionController.retrieve);
-app.get('/salesforce/affiliation/contact/:contactid', cors(corsOptions), affiliationController.listContact);
-app.get('/salesforce/affiliation/primary/:contactid', cors(corsOptions), affiliationController.retrievePrimary);
-app.get('/salesforce/affiliation/:contactid/:accountid', cors(corsOptions), affiliationController.retrieve);
-app.post('/salesforce/affiliation', cors(corsOptions), affiliationController.create);
-app.put('/salesforce/affiliation/:affiliationid', cors(corsOptions), affiliationController.update);
+app.get('/salesforce/aff/contact/:contactid', cors(corsOptions), affiliationController.listContact);
+app.get('/salesforce/aff/primary/:contactid', cors(corsOptions), affiliationController.retrievePrimary);
+app.get('/salesforce/aff/:contactid/:accountid', cors(corsOptions), affiliationController.retrieve);
+app.post('/salesforce/aff', cors(corsOptions), affiliationController.create);
+app.put('/salesforce/aff/:affiliationid', cors(corsOptions), affiliationController.update);
 app.get('/salesforce/contact/:email', cors(corsOptions), contactController.retrieve);
 app.post('/salesforce/contact', cors(corsOptions), contactController.create);
 app.put('/salesforce/contact/:contactid', cors(corsOptions), contactController.update);
