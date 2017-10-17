@@ -86,6 +86,11 @@ exports.create = (req, res, next) => {
     }
   }
 
+  // HasOptedOutOfEmail 0 issue
+  if (typeof contact['HasOptedOutOfEmail'] === 'string') {
+    delete contact['HasOptedOutOfEmail'];
+  }
+
   salesforce.conn.sobject('Contact')
   .create(
     contact,
@@ -120,6 +125,11 @@ exports.update = (req, res, next) => {
     if (allowedFields.hasOwnProperty(property)) {
       contact[property] = req.body[property];
     }
+  }
+
+  // HasOptedOutOfEmail 0 issue
+  if (typeof contact['HasOptedOutOfEmail'] === 'string') {
+    delete contact['HasOptedOutOfEmail'];
   }
 
   // this is where you'll need to add in the relevant req.body if they exist

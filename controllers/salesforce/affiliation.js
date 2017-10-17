@@ -14,7 +14,7 @@ var allowedFields = {
 };
 
 /**
- * @api {get} /salesforce/affiliation Retrieve affiliations
+ * @api {get} /salesforce/aff Retrieve affiliations
  * @apiName RetrieveAffiliations
  * @apiGroup Affiliation
  * @apiUse listParams
@@ -51,7 +51,7 @@ exports.listContact = (req, res, next) => {
 };
 
 /**
- * @api {get} /affiliations/:email Retrieve affiliation
+ * @api {get} /aff/:email Retrieve affiliation
  * @apiName RetrieveAffiliation
  * @apiGroup Affiliation
  * @apiSuccess {Object} affiliation Affiliation's data.
@@ -91,7 +91,7 @@ exports.retrieve = (req, res, next) => {
 };
 
 /**
- * @api {get} /affiliations/primary/:contactid Retrieve affiliation
+ * @api {get} /aff/primary/:contactid Retrieve affiliation
  * @apiName RetrievePrimaryAffiliation
  * @apiGroup Affiliation
  * @apiSuccess {Object} affiliation Affiliation's data.
@@ -125,7 +125,7 @@ exports.retrievePrimary = (req, res, next) => {
 };
 
 /**
- * @api {post} /affiliations Create affiliation
+ * @api {post} /aff Create affiliation
  * @apiName CreateAffiliation
  * @apiGroup Affiliation
  * @apiSuccess {Object} affiliation Affiliation's data.
@@ -158,7 +158,7 @@ exports.create = (req, res, next) => {
 };
 
 /**
- * @api {post} /affiliations Update affiliation
+ * @api {post} /aff Update affiliation
  * @apiName UpdateAffiliation
  * @apiGroup Affiliation
  * @apiSuccess {Object} affiliation Affiliation's data.
