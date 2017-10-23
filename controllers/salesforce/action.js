@@ -18,7 +18,8 @@ var allowedFields = {
   Description__c: 1,
   Help_text__c: 1,
   Supporting_text__c: 1,
-  RecordTypeId: 1
+  RecordTypeId: 1,
+  OwnerId: 1
 };
 
 /**
