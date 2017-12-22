@@ -6,6 +6,7 @@ var allowedFields = {
   FirstName: 1,
   Salutation: 1,
   Preferred_name__c: 1,
+  Country__c: 1,
   Gender__c: 1,
   Gender_another_term__c: 1,
   HasOptedOutOfEmail: 1,

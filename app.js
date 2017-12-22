@@ -32,6 +32,7 @@ const accountController = require('./controllers/salesforce/account')
 const actionController = require('./controllers/salesforce/action');
 const affiliationController = require('./controllers/salesforce/affiliation');
 const contactController = require('./controllers/salesforce/contact');
+const countryController = require('./controllers/salesforce/country')
 const participantController = require('./controllers/salesforce/participant');
 const questionController = require('./controllers/salesforce/question');
 const responseController = require('./controllers/salesforce/response');
@@ -104,6 +105,8 @@ app.put('/salesforce/aff/:affiliationid', cors(corsOptions), affiliationControll
 app.get('/salesforce/contact/:email', cors(corsOptions), contactController.retrieve);
 app.post('/salesforce/contact', cors(corsOptions), contactController.create);
 app.put('/salesforce/contact/:contactid', cors(corsOptions), contactController.update);
+app.get('/salesforce/country', cors(corsOptions), countryController.list);
+app.get('/salesforce/country/:countryid', cors(corsOptions), countryController.retrieve);
 app.get('/salesforce/participant/:contactid/:actionid', cors(corsOptions), participantController.retrieve);
 app.post('/salesforce/participant', cors(corsOptions), participantController.create);
 app.put('/salesforce/participant/:participantid', cors(corsOptions), participantController.update);
