@@ -83,6 +83,11 @@ exports.create = (req, res, next) => {
         console.error(err);
         return next(err);
       }
+      for (var property in req.body) {
+        if (!allowedFields.hasOwnProperty(property)) {
+          participant[property] = req.body[property];
+        }
+      }
       participant.Id = ret.id;
       participant.success = ret.success;
       res.send(participant);
@@ -122,6 +127,11 @@ exports.update = (req, res, next) => {
       if (err || !ret.success) {
         console.error(err);
         return next(err);
+      }
+      for (var property in req.body) {
+        if (!allowedFields.hasOwnProperty(property)) {
+          participant[property] = req.body[property];
+        }
       }
       participant.success = ret.success;
 

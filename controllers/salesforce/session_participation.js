@@ -27,7 +27,6 @@ exports.list = (req, res, next) => {
     allowedFields
   )
   .sort({ CreatedDate: -1, Name : 1 })
-  .limit(50)
   .skip(0)
   .execute(function(err, records) {
     if (err) {
@@ -105,6 +104,11 @@ exports.create = (req, res, next) => {
         console.error(err);
         return next(err);
       }
+      for (var property in req.body) {
+        if (!allowedFields.hasOwnProperty(property)) {
+          session_participation[property] = req.body[property];
+        }
+      }
       session_participation.Id = ret.id;
       session_participation.success = ret.success;
       res.send(session_participation);
@@ -148,6 +152,11 @@ exports.update = (req, res, next) => {
       if (err || !ret.success) {
         console.error(err);
         return next(err);
+      }
+      for (var property in req.body) {
+        if (!allowedFields.hasOwnProperty(property)) {
+          session_participation[property] = req.body[property];
+        }
       }
       session_participation.success = ret.success;
 

@@ -25,7 +25,6 @@ exports.list = (req, res, next) => {
     allowedFields
   )
   .sort({ Name : 1 })
-  .limit(50)
   .skip(0)
   .execute(function(err, records) {
     if (err) {
@@ -69,7 +68,6 @@ exports.listByType = (req, res, next) => {
     allowedFields
   )
   .sort({ Name : 1 })
-  .limit(50)
   .skip(0)
   .execute(function(err, records) {
     if (err) {
@@ -128,6 +126,11 @@ exports.create = (req, res, next) => {
         console.error(err);
         return next(err);
       }
+      for (var property in req.body) {
+        if (!allowedFields.hasOwnProperty(property)) {
+          account[property] = req.body[property];
+        }
+      }
       account.Id = ret.id;
       account.success = ret.success;
       res.send(account);
@@ -163,6 +166,11 @@ exports.update = (req, res, next) => {
       if (err || !ret.success) {
         console.error(err);
         return next(err);
+      }
+      for (var property in req.body) {
+        if (!allowedFields.hasOwnProperty(property)) {
+          account[property] = req.body[property];
+        }
       }
       account.success = ret.success;
       res.send(account);

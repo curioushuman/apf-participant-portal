@@ -27,7 +27,6 @@ exports.list = (req, res, next) => {
     allowedFields
   )
   .sort({ CreatedDate: 1, Name : 1 })
-  .limit(50)
   .skip(0)
   .execute(function(err, records) {
     if (err) {

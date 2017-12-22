@@ -31,7 +31,9 @@ var allowedFields = {
   EN_Skills_Ability_to_read_in_English__c: 1,
   EN_Skills_Ability_to_speak_English__c: 1,
   EN_Skills_Ability_to_understand_spoken__c: 1,
-  EN_Skills_Ability_to_write_in_English__c: 1
+  EN_Skills_Ability_to_write_in_English__c: 1,
+  Emergency_contact_name__c: 1,
+  Emergency_contact_phone_or_email__c: 1
 };
 
 /**
@@ -87,9 +89,9 @@ exports.create = (req, res, next) => {
   }
 
   // HasOptedOutOfEmail 0 issue
-  if (typeof contact['HasOptedOutOfEmail'] === 'string') {
-    delete contact['HasOptedOutOfEmail'];
-  }
+  // if (typeof contact['HasOptedOutOfEmail'] === 'string') {
+  //   delete contact['HasOptedOutOfEmail'];
+  // }
 
   salesforce.conn.sobject('Contact')
   .create(
@@ -99,7 +101,17 @@ exports.create = (req, res, next) => {
         console.error(err);
         return next(err);
       }
+      for (var property in req.body) {
+        if (!allowedFields.hasOwnProperty(property)) {
+          contact[property] = req.body[property];
+        }
+      }
       contact.Id = ret.id;
+      for (var property in req.body) {
+        if (!allowedFields.hasOwnProperty(property)) {
+          contact[property] = req.body[property];
+        }
+      }
       contact.success = ret.success;
       res.send(contact);
     }
@@ -128,9 +140,9 @@ exports.update = (req, res, next) => {
   }
 
   // HasOptedOutOfEmail 0 issue
-  if (typeof contact['HasOptedOutOfEmail'] === 'string') {
-    delete contact['HasOptedOutOfEmail'];
-  }
+  // if (typeof contact['HasOptedOutOfEmail'] === 'string') {
+  //   delete contact['HasOptedOutOfEmail'];
+  // }
 
   // this is where you'll need to add in the relevant req.body if they exist
   salesforce.conn.sobject('Contact')
@@ -140,6 +152,16 @@ exports.update = (req, res, next) => {
       if (err || !ret.success) {
         console.error(err);
         return next(err);
+      }
+      for (var property in req.body) {
+        if (!allowedFields.hasOwnProperty(property)) {
+          contact[property] = req.body[property];
+        }
+      }
+      for (var property in req.body) {
+        if (!allowedFields.hasOwnProperty(property)) {
+          contact[property] = req.body[property];
+        }
       }
       contact.success = ret.success;
       res.send(contact);
