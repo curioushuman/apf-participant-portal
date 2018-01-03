@@ -2,7 +2,8 @@ const salesforce = require('../salesforce');
 
 var allowedFields = {
   Id: 1,
-  Name: 1
+  Name: 1,
+  Country__c: 1
 };
 
 /**
