@@ -2,6 +2,7 @@ const salesforce = require('../salesforce');
 
 var allowedFields = {
   Id: 1,
+  Name: 1,
   Prior_experience_with_action_topic__c: 1,
   Knowledge_they_would_like_to_gain__c: 1,
   Skills_they_would_like_to_gain__c: 1,
@@ -143,5 +144,38 @@ exports.update = (req, res, next) => {
       res.send(participant);
     }
   );
+
+};
+
+/**
+ * @api {get} /salesforce/participant/related_action Retrieve PAX by related
+ * @apiName RetrieveParticipants
+ * @apiGroup Participant
+ * @apiUse listParams
+ * @apiSuccess {Object[]} participants List of participants.
+ * @apiError {Object} 400 Some parameters may contain invalid values.
+ */
+exports.listByRelatedAction = (req, res, next) => {
+
+  var conditions = {
+    'Contact__c': req.params.contactid,
+    'Action__r.Registration_via_related_action__c': req.params.actionid
+  };
+
+  salesforce.conn.sobject('Participant__c')
+  .find(
+    conditions,
+    allowedFields
+  )
+  .sort({ Name : 1 })
+  .skip(0)
+  .execute(function(err, records) {
+    if (err) {
+      console.error(err);
+      return next(err);
+    }
+    console.log("fetched : " + records.length);
+    res.send(records);
+  });
 
 };

@@ -19,6 +19,9 @@ var allowedFields = {
   Show_Expectations_section__c: 1,
   Show_IT_Skills_section__c: 1,
   Show_Sessions_section__c: 1,
+  Show_Related_Events_section__c: 1,
+  Registration_via_related_action__c: 1,
+  Related_registration_is_automatic__c: 1,
   // Training_partner__c: 1,
   Description__c: 1,
   Help_text__c: 1,
@@ -48,6 +51,38 @@ exports.list = (req, res, next) => {
   )
   .sort({ CreatedDate: -1, Name : 1 })
   .limit(5)
+  .skip(0)
+  .execute(function(err, records) {
+    if (err) {
+      console.error(err);
+      return next(err);
+    }
+    console.log("fetched : " + records.length);
+    res.send(records);
+  });
+
+};
+
+/**
+ * @api {get} /salesforce/action/related_action Retrieve actions by related
+ * @apiName RetrieveActions
+ * @apiGroup Action
+ * @apiUse listParams
+ * @apiSuccess {Object[]} actions List of actions.
+ * @apiError {Object} 400 Some parameters may contain invalid values.
+ */
+exports.listByRelatedAction = (req, res, next) => {
+
+  var conditions = {
+    'Registration_via_related_action__c' : req.params.actionid
+  };
+
+  salesforce.conn.sobject('Action__c')
+  .find(
+    conditions,
+    allowedFields
+  )
+  .sort({ Name : 1 })
   .skip(0)
   .execute(function(err, records) {
     if (err) {

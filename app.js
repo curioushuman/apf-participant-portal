@@ -32,6 +32,7 @@ const accountController = require('./controllers/salesforce/account')
 const actionController = require('./controllers/salesforce/action');
 const affiliationController = require('./controllers/salesforce/affiliation');
 const contactController = require('./controllers/salesforce/contact');
+const contentVersionController = require('./controllers/salesforce/content_version');
 const countryController = require('./controllers/salesforce/country')
 const participantController = require('./controllers/salesforce/participant');
 const questionController = require('./controllers/salesforce/question');
@@ -97,17 +98,20 @@ app.get('/salesforce/account/:accountid', cors(corsOptions), accountController.r
 app.post('/salesforce/account', cors(corsOptions), accountController.create);
 app.put('/salesforce/account/:accountid', cors(corsOptions), accountController.update);
 app.get('/salesforce/action/:slug', cors(corsOptions), actionController.retrieve);
+app.get('/salesforce/action/related_action/:actionid', cors(corsOptions), actionController.listByRelatedAction);
 app.get('/salesforce/aff/contact/:contactid', cors(corsOptions), affiliationController.listContact);
 app.get('/salesforce/aff/primary/:contactid', cors(corsOptions), affiliationController.retrievePrimary);
 app.get('/salesforce/aff/:contactid/:accountid', cors(corsOptions), affiliationController.retrieve);
 app.post('/salesforce/aff', cors(corsOptions), affiliationController.create);
 app.put('/salesforce/aff/:affiliationid', cors(corsOptions), affiliationController.update);
 app.get('/salesforce/contact/:email', cors(corsOptions), contactController.retrieve);
+// app.get('/salesforce/content_version', cors(corsOptions), contentVersionController.retrieve);
 app.post('/salesforce/contact', cors(corsOptions), contactController.create);
 app.put('/salesforce/contact/:contactid', cors(corsOptions), contactController.update);
 app.get('/salesforce/country', cors(corsOptions), countryController.list);
 app.get('/salesforce/country/:countryid', cors(corsOptions), countryController.retrieve);
 app.get('/salesforce/participant/:contactid/:actionid', cors(corsOptions), participantController.retrieve);
+app.get('/salesforce/participant/related_action/:contactid/:actionid', cors(corsOptions), participantController.listByRelatedAction);
 app.post('/salesforce/participant', cors(corsOptions), participantController.create);
 app.put('/salesforce/participant/:participantid', cors(corsOptions), participantController.update);
 app.get('/salesforce/question/:actionid', cors(corsOptions), questionController.list);
