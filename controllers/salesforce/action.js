@@ -18,6 +18,7 @@ var allowedFields = {
   Show_English_Skills_section__c: 1,
   Show_Expectations_section__c: 1,
   Show_IT_Skills_section__c: 1,
+  Show_Outcomes_section__c: 1,
   Show_Sessions_section__c: 1,
   Show_Related_Events_section__c: 1,
   Registration_via_related_action__c: 1,

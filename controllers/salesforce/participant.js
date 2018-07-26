@@ -7,6 +7,7 @@ var allowedFields = {
   Knowledge_they_would_like_to_gain__c: 1,
   Skills_they_would_like_to_gain__c: 1,
   Additional_information__c: 1,
+  Expected_outcomes_for_this_event__c: 1,
   Contact__c: 1,
   Action__c: 1,
   Organisation__c: 1,
