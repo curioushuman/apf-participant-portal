@@ -94,6 +94,7 @@ app.options('*', cors());
 // app.put('/salesforce/response/:responseid', cors(corsOptions), responseController.update);
 // ENABLED
 app.get('/salesforce/account/type/:type', cors(corsOptions), accountController.listByType);
+app.post('/salesforce/account/multiple/:accountids', cors(corsOptions), accountController.listByIds);
 app.get('/salesforce/account/:accountid', cors(corsOptions), accountController.retrieve);
 app.post('/salesforce/account', cors(corsOptions), accountController.create);
 app.put('/salesforce/account/:accountid', cors(corsOptions), accountController.update);

@@ -3,7 +3,8 @@ const salesforce = require('../salesforce');
 var allowedFields = {
   Id: 1,
   Name: 1,
-  Country__c: 1
+  Country__c: 1,
+  Type: 1
 };
 
 /**
@@ -33,6 +34,7 @@ exports.list = (req, res, next) => {
       return next(err);
     }
     console.log("fetched : " + records.length);
+    console.log(records);
     res.send(records);
   });
 
@@ -78,6 +80,38 @@ exports.listByType = (req, res, next) => {
     console.log("fetched : " + records.length);
     res.send(records);
   });
+
+};
+
+/**
+ * @api {get} /salesforce/accounts Retrieve accounts by list of IDs
+ * @apiName RetrieveAccountsByIds
+ * @apiGroup Account
+ * @apiUse listParams
+ * @apiSuccess {Object[]} accounts List of accounts.
+ * @apiError {Object} 400 Some parameters may contain invalid values.
+ */
+exports.listByIds = (req, res, next) => {
+
+  // don't pickup households!
+  var conditions = {
+    'RecordTypeId' : {
+      $ne: '0126F000000Acz3QAC'
+    }
+  };
+
+  salesforce.conn.sobject('Account')
+  .retrieve(
+    req.params.accountids,
+    function(err, records) {
+      if (err) {
+        console.error(err);
+        return next(err);
+      }
+      console.log("fetched : " + records.length);
+      res.send(records);
+    }
+  );
 
 };
 
