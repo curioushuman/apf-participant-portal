@@ -10,7 +10,8 @@ var allowedFields = {
   ShippingCity: 1,
   ShippingState: 1,
   ShippingPostalCode: 1,
-  Type: 1
+  Type: 1,
+  Website: 1
 };
 
 /**

@@ -10,7 +10,10 @@ var allowedFields = {
   npe5__Role__c: 1,
   npe5__Description__c: 1,
   npe5__StartDate__c: 1,
-  npe5__Status__c: 1
+  npe5__EndDate__c: 1,
+  npe5__Status__c: 1,
+  Type__c: 1,
+  International_coop_committee__c: 1
 };
 
 /**
