@@ -36,7 +36,7 @@ exports.listContact = (req, res, next) => {
     conditions,
     allowedFields
   )
-  .sort({ npe5__EndDate__c: -1, npe5__StartDate__c: -1 })
+  .sort({ npe5__EndDate__c: -1, npe5__StartDate__c: -1, CreatedDate: -1 })
   .skip(0)
   .execute(function(err, records) {
     if (err) {

@@ -2,8 +2,14 @@ const salesforce = require('../salesforce');
 
 var allowedFields = {
   Id: 1,
-  Name: 1,
   Country__c: 1,
+  Email_for_organisation__c: 1,
+  Name: 1,
+  Phone: 1,
+  ShippingStreet: 1,
+  ShippingCity: 1,
+  ShippingState: 1,
+  ShippingPostalCode: 1,
   Type: 1
 };
 
