@@ -38,7 +38,7 @@ var allowedFields = {
 };
 
 /**
- * @api {get} /contacts/:email Retrieve contact
+ * @api {get} /contacts/:contactid Retrieve contact
  * @apiName RetrieveContact
  * @apiGroup Contact
  * @apiSuccess {Object} contact Contact's data.
@@ -46,6 +46,27 @@ var allowedFields = {
  * @apiError 404 Contact not found.
  */
 exports.retrieve = (req, res, next) => {
+
+  salesforce.conn.sobject('Contact')
+  .retrieve(req.params.contactid, function(err, contact) {
+    if (err) {
+      console.error(err);
+      return next(err);
+    }
+    res.send(contact);
+  });
+
+};
+
+/**
+ * @api {get} /contacts/:email Retrieve contact
+ * @apiName RetrieveContact
+ * @apiGroup Contact
+ * @apiSuccess {Object} contact Contact's data.
+ * @apiError {Object} 400 Some parameters may contain invalid values.
+ * @apiError 404 Contact not found.
+ */
+exports.retrieveByEmail = (req, res, next) => {
 
   salesforce.conn.sobject('Contact')
   .find(

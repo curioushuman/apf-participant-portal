@@ -53,6 +53,42 @@ exports.listContact = (req, res, next) => {
 };
 
 /**
+ * @api {get} /salesforce/aff Retrieve affiliations
+ * @apiName RetrieveAffiliations
+ * @apiGroup Affiliation
+ * @apiUse listParams
+ * @apiSuccess {Object[]} affiliations List of affiliations.
+ * @apiError {Object} 400 Some parameters may contain invalid values.
+ */
+exports.listAccount = (req, res, next) => {
+
+  var conditions = {
+    'npe5__Organization__c': req.params.accountid
+  };
+
+  if (req.query.current !== undefined) {
+    conditions['npe5__Status__c'] = 'Current';
+  }
+
+  salesforce.conn.sobject('npe5__Affiliation__c')
+  .find(
+    conditions,
+    allowedFields
+  )
+  .sort({ npe5__EndDate__c: -1, npe5__StartDate__c: -1, CreatedDate: -1 })
+  .skip(0)
+  .execute(function(err, records) {
+    if (err) {
+      console.error(err);
+      return next(err);
+    }
+    console.log("fetched : " + records.length);
+    res.send(records);
+  });
+
+};
+
+/**
  * @api {get} /aff/:email Retrieve affiliation
  * @apiName RetrieveAffiliation
  * @apiGroup Affiliation
