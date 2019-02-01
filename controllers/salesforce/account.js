@@ -107,9 +107,13 @@ exports.listByIds = (req, res, next) => {
     }
   };
 
+  console.log(req.params.accountids);
+  var accountidsArray = req.params.accountids.split(';');
+  console.log(accountidsArray);
+
   salesforce.conn.sobject('Account')
   .retrieve(
-    req.params.accountids,
+    accountidsArray,
     function(err, records) {
       if (err) {
         console.error(err);
