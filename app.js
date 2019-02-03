@@ -39,6 +39,7 @@ const questionController = require('./controllers/salesforce/question');
 const responseController = require('./controllers/salesforce/response');
 const sessionController = require('./controllers/salesforce/session');
 const sessionParticipationController = require('./controllers/salesforce/session_participation');
+const taskController = require('./controllers/salesforce/task');
 const userController = require('./controllers/salesforce/user');
 
 /**
@@ -136,6 +137,9 @@ app.get('/salesforce/session_participation/:participantid', cors(corsOptions), s
 app.get('/salesforce/session_participation/:participantid/:sessionid', cors(corsOptions), sessionParticipationController.retrieve);
 app.post('/salesforce/session_participation', cors(corsOptions), sessionParticipationController.create);
 app.put('/salesforce/session_participation/:session_participantid', cors(corsOptions), sessionParticipationController.update);
+
+app.post('/salesforce/task', cors(corsOptions), taskController.create);
+app.put('/salesforce/task/:taskid', cors(corsOptions), taskController.update);
 
 app.get('/salesforce/user/:uid', cors(corsOptions), userController.retrieve);
 
